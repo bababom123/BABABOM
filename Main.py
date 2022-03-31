@@ -11,8 +11,8 @@ with open("upbit_openapikey.txt") as f:
     upbit = pyupbit.Upbit(key, secret)
 
 
-# tickers = ['KRW-BTC', 'KRW-ETH', 'KRW-BCH', 'KRW-AAVE', 'KRW-LTC', 'KRW-SOL', 'KRW-BSV', 'KRW-AVAX', 'KRW-AXS', 'KRW-WAVES', 'KRW-ETC', 'KRW-BTG', 'KRW-STRK', 'KRW-ATOM', 'KRW-NEO', 'KRW-DOT', 'KRW-LINK', 'KRW-REP', 'KRW-NEAR', 'KRW-QTUM']
-tickers = list(sc.get_Top_MarketGap_n(50)['ticker'])
+tickers = ['KRW-BTC', 'KRW-ETH', 'KRW-BCH', 'KRW-AAVE', 'KRW-LTC', 'KRW-SOL', 'KRW-BSV', 'KRW-AVAX', 'KRW-AXS', 'KRW-WAVES', 'KRW-ETC', 'KRW-BTG', 'KRW-STRK', 'KRW-ATOM', 'KRW-NEO', 'KRW-DOT', 'KRW-LINK', 'KRW-REP', 'KRW-NEAR', 'KRW-QTUM']
+# tickers = list(sc.get_Top_MarketGap_n(50)['ticker'])
 
 now = datetime.datetime.now()
 mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1) # 자정
@@ -29,7 +29,7 @@ while True:
                 mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
                 ma5 = upa.get_yesterday_ma_n(ticker, 5)
                 print(ticker, "매도발생")
-                # upa.sell_crypto_currency(ticker)
+                upa.sell_crypto_currency(ticker)
             
             if(upa.KRW <= 1): # 원화 없으면 매수 안함
                 continue        
@@ -37,9 +37,9 @@ while True:
             current_price = pyupbit.get_current_price(ticker)
             if (current_price > target_price) and (current_price > ma5):
                 print(ticker, "매수발생")
-                # upa.buy_crypto_currency(ticker)
+                upa.buy_crypto_currency(ticker)
             time.sleep(0.3)
-        print("whee...")
+        # print("whee...")
     except:
         print("에러 발생")
         exit(1)    
