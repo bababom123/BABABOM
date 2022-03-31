@@ -19,6 +19,7 @@ mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1) # 
 
 while True:
     try:
+        print("start")
         for ticker in tickers:
             now = datetime.datetime.now()
             target_price = upa.get_target_price(ticker)
@@ -28,7 +29,7 @@ while True:
                 now = datetime.datetime.now()
                 mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
                 ma5 = upa.get_yesterday_ma_n(ticker, 5)
-                print(ticker, "매도발생")
+                print(ticker, "SELL")
                 upa.sell_crypto_currency(ticker)
             
             if(upa.KRW <= 1): # 원화 없으면 매수 안함
@@ -36,10 +37,10 @@ while True:
 
             current_price = pyupbit.get_current_price(ticker)
             if (current_price > target_price) and (current_price > ma5):
-                print(ticker, "매수발생")
+                print(ticker, "BUY")
                 upa.buy_crypto_currency(ticker)
             time.sleep(0.3)
         # print("whee...")
     except:
-        print("에러 발생")
+        print("ERR")
         exit(1)    
