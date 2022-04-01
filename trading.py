@@ -56,7 +56,7 @@ while True:
                     continue        
                 current_price = pyupbit.get_current_price(ticker)
                 if (current_price > target_price) and (current_price > ma5):
-                    # buy_crypto_currency(ticker)
+                    buy_crypto_currency(ticker)
                     Basket.append(ticker)
                     print(ticker, " BUY")
                 time.sleep(0.3)            
@@ -65,7 +65,7 @@ while True:
             if end_time - datetime.timedelta(second=5) < now < end_time: # 코드의 실행 속도 때문에 정확한 시간 비교는 불가능하므로 범위를 통해 유추한다.
                 now = datetime.datetime.now()
                 ma5 = get_yesterday_ma_n(ticker, 5)
-                # sell_crypto_currency(ticker)
+                sell_crypto_currency(ticker)
                 Basket.pop()
                 print(ticker, " SELL")
             time.sleep(0.3)
